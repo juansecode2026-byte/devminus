@@ -1,0 +1,60 @@
+# Manifiesto de la estructura de DevMinus.
+# Cada carpeta lleva un "para" que aparece en el marcador _VACIA.md mientras está vacía.
+# Se corre con:
+#   python scripts/estructura.py crear
+#   python scripts/estructura.py revisar
+
+proyecto: DevMinus
+
+carpetas:
+  - ruta: .claude/agents
+    para: Subagentes markdown propios de DevMinus
+  - ruta: .claude/skills
+    para: Procedimientos reutilizables propios de DevMinus
+  - ruta: .claude/commands
+    para: Atajos /slash propios de DevMinus
+  - ruta: .claude/rules
+    para: Reglas por tema, cargadas solo cuando aplican
+  - ruta: .claude/workflows
+    para: Scripts de Dynamic Workflows guardados
+
+  - ruta: documentacion
+    para: Documentación del proyecto. El detalle de marca vive en MARCA.md; el stack en STACK.md
+
+  - ruta: db
+    para: Base de datos (Supabase/Postgres) - leads y lo que el sitio necesite persistir
+  - ruta: db/migrations
+    para: Migraciones incrementales del schema, en orden cronológico
+  - ruta: db/policies
+    para: Políticas RLS en archivos separados del schema - RLS obligatorio desde el primer día
+
+  - ruta: backend
+    para: Capa de servidor completa
+  - ruta: backend/workers
+    para: API como Cloudflare Workers (reemplaza la capa Express de hellominus.com) - hoy el formulario de contacto
+  - ruta: backend/agent
+    para: Agentes Claude que sean endpoints (webhook, cron, cola). Hoy ninguno - ver DECISIONES.md
+
+  - ruta: frontend
+    para: Capa de cliente completa
+  - ruta: frontend/web
+    para: App React + Vite + TypeScript + Tailwind - el sitio de marca (portada, servicios, equipo, contacto)
+  - ruta: frontend/web/src
+    para: Código fuente de la app
+  - ruta: frontend/web/src/pages
+    para: Páginas de nivel superior (Portada, Servicios, Equipo, Contacto)
+  - ruta: frontend/web/src/components
+    para: Componentes reutilizables de UI
+  - ruta: frontend/web/src/hooks
+    para: Hooks de React
+  - ruta: frontend/web/src/lib
+    para: Clientes y utilidades compartidas (supabaseClient, helpers)
+  - ruta: frontend/web/src/services
+    para: Funciones async simples para llamadas a Supabase y APIs externas, un archivo por sistema externo
+  - ruta: frontend/web/src/stores
+    para: Stores de Zustand, un dominio por archivo, sin middleware salvo justificación puntual
+  - ruta: frontend/web/public
+    para: Assets estáticos servidos tal cual
+
+  - ruta: agentes-sdk
+    para: Scripts Python con claude_agent_sdk que corren local - loops, triggers por evento u horario. Hoy ninguno
