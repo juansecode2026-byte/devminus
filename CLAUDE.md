@@ -12,7 +12,7 @@ Todo el contexto de marca (posicionamiento, oferta, catálogo, tono, hoja de rut
 
 ## Alcance
 
-DevMinus es la **marca y el índice**, no el contenedor de otros proyectos. Cada proyecto del laboratorio sigue siendo una carpeta independiente; DevMinus los referencia (portafolio, fichas, landing), no los contiene. Las academias quedan fuera de esta marca.
+DevMinus es la **marca principal**: todos los proyectos del repositorio le pertenecen y forman su catálogo, **excepto las academias**, que son solo de aprendizaje personal y quedan fuera. Cada proyecto sigue siendo una carpeta independiente por una regla técnica del laboratorio; DevMinus los presenta (portafolio, fichas, landing) sin contenerlos físicamente.
 
 Lo que se construye acá es el **sitio de marca**: portada, servicios, equipo y contacto. Frontend con el peso principal; backend y base de datos mínimos (formulario de contacto, leads).
 
