@@ -17,6 +17,15 @@ Construida a partir de la revisión del diseñador UX (`REVISION-UX.md`).
 - Archivo: `devminus-cobalto-v3.html`
 - La versión 2 (`devminus-cobalto.html`) se conserva para comparar.
 
+## Login del panel interno (guardado para cuando se construya)
+Se exploraron tres variantes de login con el estilo de vidrio de una referencia ("Glassy Login Form v3") y la paleta cobalto. El usuario eligió **Bisel**: tarjeta con esquinas biseladas sobre cintas de luz azul.
+- Artefacto: https://claude.ai/artifact/Jy9f2KxfRZPNvYMuRkCTMT
+- Archivo: `login-interno-bisel.html`
+- Textos ajustados a un **panel interno** de métricas del equipo, no a un portal de clientes.
+- Otras variantes vistas y no elegidas: Dividido (https://claude.ai/artifact/6Kt1XT6cu47m8yC5b5iN2J) y Código sin contraseña (https://claude.ai/artifact/RqsKLvBzKFbZPdEzQAkHWS).
+- Estado: solo diseño. No se construye hasta activar el dashboard interno (ver `DECISIONES.md`).
+- Pendiente al construirlo: decidir si el acceso es por contraseña o por código al correo, y si se ofrece acceso con Google o Microsoft (hoy el prototipo los muestra).
+
 ## Descartados por ahora
 - Índigo: https://claude.ai/artifact/6sQdZU9Dq5YUUkgLKN2Cet
 - Platino: https://claude.ai/artifact/XTVJx7vAAt8uc7J12H9bVz

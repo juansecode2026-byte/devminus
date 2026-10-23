@@ -31,6 +31,7 @@ Lo que se construye acá es el **sitio de marca**: portada, servicios, equipo y 
 - La sección de Equipo no se renderiza hasta tener al menos dos perfiles reales.
 - Variables de entorno (ver `frontend/web/.env.example`):
   - `VITE_CONTACT_ENDPOINT`: URL del Worker que recibe el formulario. Vacía = modo prototipo (valida y muestra estados, no envía). Es pública: nunca poner secretos en variables `VITE_`.
+- **Supabase:** el proyecto se llama `Devminus`, ref `kobxxqgstzsdlznyrgrc`, región `ca-central-1`. Está vinculado por variables en `frontend/web/.env.local` (ignorado por Git). Hoy no tiene tablas ni se usa desde la app: las migraciones se harán cuando el formulario deba guardar leads. Cuando existan, RLS desde el primer día y las políticas en archivos SQL aparte (`db/policies/`).
 - Despliegue previsto en Cloudflare Pages; `public/_redirects` hace el fallback de la SPA.
 
 ## Agentes

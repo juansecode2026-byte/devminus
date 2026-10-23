@@ -1,0 +1,160 @@
+<title>DevMinus Acceso Interno</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: tarjeta de vidrio con esquinas biseladas centrada sobre cintas de luz cobalto; la versión más cercana a la referencia. */
+:root{
+  --bg:#060a13; --text:#edf2fb; --muted:#9aa6bd; --placeholder:#7d8aa3;
+  --s1:rgba(220,235,255,.06); --s2t:rgba(220,235,255,.09); --s2b:rgba(220,235,255,.03);
+  --field:rgba(3,6,12,.55); --line:rgba(215,232,255,.10); --line-strong:rgba(215,232,255,.22); --line-field:rgba(200,220,255,.45);
+  --accent:#4b8dff; --accent-ink:#030c1c; --accent-soft:rgba(75,141,255,.15);
+  --grad:linear-gradient(135deg,#a9c9ff 0%,#5b97ff 55%,#3f80f7 100%);
+  --ring:#a9c9ff; --bad:#f87171; --ok:#34d399; --glow:rgba(75,141,255,.35);
+  --f-display:"Sora",ui-sans-serif,system-ui,sans-serif;
+  --f-body:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"Geist Mono",ui-monospace,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{min-height:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:400 16px/24px var(--f-body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+:focus-visible{outline:2px solid var(--ring);outline-offset:3px}
+
+/* cintas de luz */
+.scene{position:fixed;inset:0;overflow:hidden;z-index:0;pointer-events:none;background:radial-gradient(70vw 60vw at 80% 10%,rgba(75,141,255,.18),transparent 60%),var(--bg)}
+.ribbon{position:absolute;width:160vmax;height:14vmax;left:-30vmax;border-radius:50%;filter:blur(2px);opacity:.9;
+  background:linear-gradient(90deg,transparent 0%,rgba(30,60,120,.0) 10%,rgba(60,130,255,.55) 45%,rgba(160,210,255,.85) 52%,rgba(40,90,200,.4) 60%,transparent 90%)}
+.r1{top:8%;transform:rotate(-24deg)}
+.r2{top:52%;transform:rotate(-18deg);height:9vmax;opacity:.6}
+.r3{top:78%;transform:rotate(-30deg);height:20vmax;opacity:.35;filter:blur(18px)}
+.shade{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(6,10,19,.15),rgba(6,10,19,.85) 75%)}
+@media (prefers-reduced-motion:no-preference){.r1{animation:drift 18s ease-in-out infinite alternate}.r2{animation:drift 22s ease-in-out infinite alternate-reverse}}
+@keyframes drift{to{translate:6vmax 2vmax}}
+
+.page{position:relative;z-index:1;min-height:100vh;display:grid;place-items:center;padding-block:48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* tarjeta biselada: capa de borde + capa de vidrio con el mismo recorte */
+.card{position:relative;width:100%;max-width:460px;--cut:44px;--cut2:64px}
+.card::before,.glass{clip-path:polygon(var(--cut) 0,100% 0,100% calc(100% - var(--cut2)),calc(100% - var(--cut2)) 100%,0 100%,0 var(--cut))}
+.card::before{content:"";position:absolute;inset:0;background:linear-gradient(160deg,rgba(169,201,255,.55),rgba(215,232,255,.08) 35%,rgba(215,232,255,.06) 70%,rgba(75,141,255,.5))}
+.glass{position:relative;margin:1px;padding:40px 36px 36px;background:linear-gradient(180deg,rgba(14,22,40,.78),rgba(8,13,25,.86));backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%)}
+.corner{position:absolute;width:40px;height:40px;border:1px solid rgba(169,201,255,.35);background:rgba(220,235,255,.05)}
+.corner.tl{top:-14px;left:-14px;clip-path:polygon(0 0,100% 0,0 100%);border-radius:6px}
+.corner.br{bottom:-18px;right:-18px;width:56px;height:56px;clip-path:polygon(100% 0,100% 100%,0 100%);border-radius:8px}
+
+.brand{display:flex;align-items:center;gap:8px;font:600 15px/1 var(--f-display);margin-bottom:28px}
+.mark{width:24px;height:24px;border-radius:8px;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font:500 14px/1 var(--f-mono)}
+h1{font:600 30px/1.1 var(--f-display);letter-spacing:-.025em;margin:0 0 8px}
+h1 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{margin:0 0 28px;color:var(--muted);font-size:14px;line-height:20px}
+
+form{display:grid;gap:16px}
+.field{display:grid;gap:6px}
+.field label,.lbl{font:500 14px/20px var(--f-body)}
+.input{position:relative}
+.input svg.lead{position:absolute;left:14px;top:50%;width:16px;height:16px;transform:translateY(-50%);color:var(--muted);pointer-events:none}
+input[type=email],input[type=password],input[type=text]{width:100%;min-height:48px;padding:12px 48px 12px 42px;border-radius:12px;border:1px solid var(--line-field);background:var(--field);color:var(--text);font:400 16px/24px var(--f-body);transition:border-color .2s,box-shadow .2s}
+input::placeholder{color:var(--placeholder)}
+input:hover{border-color:rgba(200,220,255,.6)}
+input:focus{outline:2px solid var(--ring);outline-offset:2px;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+input[aria-invalid=true]{border-color:var(--bad)}
+.eye{position:absolute;right:4px;top:50%;transform:translateY(-50%);width:40px;height:40px;border:0;border-radius:10px;background:transparent;color:var(--muted);cursor:pointer;display:grid;place-items:center}
+.eye:hover{color:var(--text);background:var(--s1)}
+.eye svg{width:18px;height:18px}
+.err{display:none;font-size:14px;line-height:20px;color:var(--bad);margin:0}
+.field.invalid .err{display:block}
+
+.row{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;font-size:14px}
+.check{display:inline-flex;align-items:center;gap:8px;min-height:44px;cursor:pointer;color:var(--muted)}
+.check input{width:18px;height:18px;accent-color:var(--accent);margin:0}
+.link{color:var(--text);text-decoration:none;min-height:44px;display:inline-flex;align-items:center;border-radius:6px}
+.link:hover{color:#a9c9ff;text-decoration:underline}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;border-radius:12px;border:1px solid transparent;font:600 15px/1 var(--f-body);cursor:pointer;transition:transform .2s,box-shadow .2s,filter .2s,background .2s;width:100%}
+.btn svg{width:16px;height:16px}
+.primary{background:var(--grad);color:var(--accent-ink);box-shadow:0 10px 32px -10px var(--glow),inset 0 1px 0 rgba(255,255,255,.4)}
+.primary:hover{transform:translateY(-1px);box-shadow:0 14px 38px -8px var(--glow),inset 0 1px 0 rgba(255,255,255,.4)}
+.primary:active{transform:none;filter:brightness(.95)}
+.primary[disabled]{cursor:progress;filter:saturate(.7) brightness(.9);transform:none}
+.spin{width:16px;height:16px;border-radius:50%;border:2px solid var(--accent-ink);border-top-color:transparent;animation:sp .8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.divider{display:flex;align-items:center;gap:12px;font:500 12px/16px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:8px 0}
+.divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--line)}
+.sso{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ghost{background:var(--s1);border-color:var(--line-strong);color:var(--text);font-weight:500}
+.ghost:hover{background:var(--s2t)}
+.ghost:active{filter:brightness(.95)}
+.foot{text-align:center;font-size:14px;color:var(--muted);margin:16px 0 0}
+.status{margin:0;padding:12px 16px;border-radius:12px;font-size:14px;line-height:20px;border:1px solid var(--line-strong);background:var(--s1)}
+.proto{text-align:center;font:400 12px/16px var(--f-mono);color:var(--muted);margin-top:24px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+@media (max-width:420px){.glass{padding:32px 20px 28px}.card{--cut:28px;--cut2:40px}h1{font-size:26px}.sso{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="scene" aria-hidden="true"><div class="ribbon r1"></div><div class="ribbon r2"></div><div class="ribbon r3"></div><div class="shade"></div></div>
+
+<main class="page">
+  <div class="card">
+    <span class="corner tl" aria-hidden="true"></span>
+    <span class="corner br" aria-hidden="true"></span>
+    <div class="glass">
+      <div class="brand"><span class="mark" aria-hidden="true">−</span>DevMinus <span style="margin-left:8px;font:500 12px/16px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)">Panel interno</span></div>
+      <h1>Bienvenido <span>de nuevo</span></h1>
+      <p class="sub">Entra al panel de métricas del equipo con tu correo de trabajo.</p>
+
+      <form id="f" novalidate>
+        <div class="field" id="g-mail">
+          <label for="mail">Correo</label>
+          <div class="input">
+            <svg class="lead" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="1.5" y="3" width="13" height="10" rx="2"/><path d="m2 4.5 6 4.5 6-4.5"/></svg>
+            <input id="mail" type="email" autocomplete="email" placeholder="nombre@empresa.com" aria-describedby="e-mail">
+          </div>
+          <p class="err" id="e-mail">Revisa el correo: falta la @ o el dominio.</p>
+        </div>
+        <div class="field" id="g-pass">
+          <label for="pass">Contraseña</label>
+          <div class="input">
+            <svg class="lead" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="7" width="10" height="7" rx="1.5"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2"/></svg>
+            <input id="pass" type="password" autocomplete="current-password" placeholder="••••••••••" aria-describedby="e-pass">
+            <button class="eye" type="button" id="eye" aria-label="Mostrar contraseña" aria-pressed="false">
+              <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1.5 9S4.2 3.8 9 3.8 16.5 9 16.5 9 13.8 14.2 9 14.2 1.5 9 1.5 9Z"/><circle cx="9" cy="9" r="2.4"/></svg>
+            </button>
+          </div>
+          <p class="err" id="e-pass">Escribe tu contraseña.</p>
+        </div>
+        <div class="row">
+          <label class="check"><input type="checkbox" id="rem" checked> Recordarme</label>
+          <a class="link" href="#recuperar">¿Olvidaste tu contraseña?</a>
+        </div>
+        <button class="btn primary" type="submit" id="go">Entrar <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10m-4-4 4 4-4 4"/></svg></button>
+        <p class="status" id="st" role="status" hidden></p>
+        <div class="divider">o continúa con</div>
+        <div class="sso">
+          <button class="btn ghost" type="button" data-sso="Google"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="#EA4335" d="M8 3.2c1.3 0 2.2.6 2.7 1l2-1.9C11.5 1.2 9.9.5 8 .5 5.1.5 2.6 2.2 1.4 4.6l2.3 1.8C4.3 4.6 6 3.2 8 3.2z"/><path fill="#4285F4" d="M15.4 8.2c0-.6-.1-1-.2-1.5H8v2.8h4.2c-.1.7-.6 1.8-1.6 2.5l2.2 1.7c1.6-1.4 2.6-3.6 2.6-5.5z"/><path fill="#FBBC05" d="M3.7 9.6A4.6 4.6 0 0 1 3.4 8c0-.6.1-1.1.3-1.6L1.4 4.6A7.5 7.5 0 0 0 .5 8c0 1.2.3 2.4.9 3.4l2.3-1.8z"/><path fill="#34A853" d="M8 15.5c2 0 3.7-.7 4.9-1.8l-2.2-1.7c-.6.4-1.5.7-2.7.7-2 0-3.7-1.3-4.3-3.1l-2.3 1.8c1.2 2.4 3.7 4.1 6.6 4.1z"/></svg>Google</button>
+          <button class="btn ghost" type="button" data-sso="Microsoft"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="#F25022" d="M1 1h6.5v6.5H1z"/><path fill="#7FBA00" d="M8.5 1H15v6.5H8.5z"/><path fill="#00A4EF" d="M1 8.5h6.5V15H1z"/><path fill="#FFB900" d="M8.5 8.5H15V15H8.5z"/></svg>Microsoft</button>
+        </div>
+        <p class="foot">¿Aún no tienes acceso? <a class="link" style="display:inline" href="#solicitar">Pídeselo a un administrador de DevMinus</a></p>
+      </form>
+    </div>
+  </div>
+</main>
+<p class="proto" style="position:relative;z-index:1;padding-bottom:24px">Prototipo de diseño · acceso al panel interno · no inicia sesión real</p>
+
+<script>
+(function(){
+  var f=document.getElementById('f'),mail=document.getElementById('mail'),pass=document.getElementById('pass'),st=document.getElementById('st'),go=document.getElementById('go'),eye=document.getElementById('eye');
+  function set(g,input,ok){document.getElementById(g).classList.toggle('invalid',!ok);if(ok)input.removeAttribute('aria-invalid');else input.setAttribute('aria-invalid','true');return ok}
+  function vm(){return set('g-mail',mail,/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(mail.value.trim()))}
+  function vp(){return set('g-pass',pass,pass.value.length>0)}
+  mail.addEventListener('blur',vm);pass.addEventListener('blur',vp);
+  eye.addEventListener('click',function(){var v=pass.type==='password';pass.type=v?'text':'password';eye.setAttribute('aria-pressed',v);eye.setAttribute('aria-label',v?'Ocultar contraseña':'Mostrar contraseña')});
+  f.addEventListener('submit',function(e){e.preventDefault();var a=vm(),b=vp();if(!a){mail.focus();return}if(!b){pass.focus();return}
+    go.disabled=true;var t=go.innerHTML;go.innerHTML='<span class="spin" aria-hidden="true"></span>Entrando…';st.hidden=true;
+    setTimeout(function(){go.disabled=false;go.innerHTML=t;st.hidden=false;st.textContent='Prototipo: los datos son válidos, pero aquí no hay una sesión real.'},900)});
+  document.querySelectorAll('[data-sso]').forEach(function(b){b.addEventListener('click',function(){st.hidden=false;st.textContent='Prototipo: el acceso con '+b.getAttribute('data-sso')+' se conecta cuando exista el backend.'})});
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();st.hidden=false;st.textContent='Prototipo: esta acción aún no tiene pantalla.'})});
+})();
+</script>

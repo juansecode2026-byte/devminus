@@ -29,6 +29,7 @@ Registro de lo que se aceptó, rechazó o aplazó, con su motivo y su condición
 |---|---|---|
 | Agente que califique leads del formulario de contacto | Idea al diseñar el scaffold | Que haya un volumen de leads que justifique no revisarlos a mano |
 | DevMinus Academy (línea para personas) | Propuesta del usuario | Que la marca tenga fuerza, junto con Hotmart |
+| Dashboard interno de métricas del equipo, con login | Idea del usuario, 2026-10-23 | Que haya leads y envíos reales; mientras tanto, una analítica ya hecha. Login diseñado: `documentacion/prototipos-frontend/login-interno-bisel.html` |
 | Casos de estudio | Idea de catálogo en MARCA.md | Cuando se requiera; lo definimos en ese momento |
 | Productos propios en venta (software) | Idea original de la marca | Marca consolidada y primeras entregas hechas |
 | Venta de contenido a personas en Hotmart | Idea de catálogo | Que la marca tenga fuerza para que la gente compre por la marca, no solo por el contenido |
