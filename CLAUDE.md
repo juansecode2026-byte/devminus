@@ -22,6 +22,17 @@ Lo que se construye acá es el **sitio de marca**: portada, servicios, equipo y 
 - Commits en español, en modo imperativo.
 - La estructura de carpetas la maneja `scripts/estructura.py` (`crear` / `revisar`); `ESTRUCTURA.md` es generado, no se edita a mano.
 
+## Frontend (`frontend/web/`)
+
+- React 18 + Vite + TypeScript + Tailwind 3 + Zustand + React Router. Comandos: `npm run dev`, `npm run build`, `npm run lint`, `npm run typecheck`.
+- **Excepción declarada al estándar del laboratorio:** el skill `revisor-full-stack` pide CSS Modules; este proyecto usa **Tailwind** porque así lo fija `STACK.md` (mismo stack de hellominus.com). La regla de "cero valores sueltos" se mantiene: todos los valores viven en `src/lib/tokens.css` y `tailwind.config.ts` solo los referencia.
+- El diseño sale de `documentacion/prototipos-frontend/REVISION-UX.md` (prototipo `devminus-cobalto-v3.html`).
+- El contenido de la página vive en `src/lib/contenido.ts` y debe coincidir con `MARCA.md`. Los valores `null` son pendientes de decisión y se muestran como "por definir".
+- La sección de Equipo no se renderiza hasta tener al menos dos perfiles reales.
+- Variables de entorno (ver `frontend/web/.env.example`):
+  - `VITE_CONTACT_ENDPOINT`: URL del Worker que recibe el formulario. Vacía = modo prototipo (valida y muestra estados, no envía). Es pública: nunca poner secretos en variables `VITE_`.
+- Despliegue previsto en Cloudflare Pages; `public/_redirects` hace el fallback de la SPA.
+
 ## Agentes
 
 No hay ninguno todavía, a propósito. `backend/agent/` y `agentes-sdk/` están vacías. Un proceso que se repite se anota en `DECISIONES.md` como candidato aplazado, no se convierte en agente sobre la marcha. Si algún día un agente termina fuera de `agentes-sdk/` por ser un endpoint, este archivo dice dónde quedó y por qué.

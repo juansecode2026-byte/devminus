@@ -18,6 +18,9 @@ Registro de lo que se aceptó, rechazó o aplazó, con su motivo y su condición
 | 2026-10-22 | Hellominus es tenant de prueba de candyCRM, no cliente real | Se usa para probar el producto; candyCRM aún no tiene clientes reales |
 | 2026-10-22 | Las academias del laboratorio quedan fuera de DevMinus | Son solo de aprendizaje personal |
 | 2026-10-22 | "Ofmar" es Hotmart, la plataforma para vender contenido | Confirmado por el usuario |
+| 2026-10-23 | Se muestran todos los proyectos del repositorio, salvo las academias y los repositorios no comerciales | Los proyectos comerciales son el catálogo; lo demás no es de la marca |
+| 2026-10-23 | Paleta Cobalto y diseño de `REVISION-UX.md` para el frontend | Favorita del usuario; revisada por el diseñador UX |
+| 2026-10-23 | Tailwind en lugar de CSS Modules en el frontend | Lo fija `STACK.md`; se declara como excepción al estándar del laboratorio. Valores solo en `tokens.css` |
 | 2026-10-16 | Stack en `STACK.md` aparte de la marca | Cambian por motivos distintos y los leen distintos lectores |
 
 ## Aplazadas
@@ -36,8 +39,14 @@ Ninguna todavía.
 
 ## Abiertas
 
+- Primera conversación gratuita de 30 minutos (la proponen los cuatro competidores revisados; no está en MARCA).
+- Precio de la auditoría, plazo de respuesta, correo de contacto y política de datos (Ley 1581).
+- Herramienta de analítica (por ejemplo Cloudflare Zaraz o Plausible).
+- Logos de "Construimos con": revisar guías de marca antes de usarlos; hoy van solo nombres.
+
 - Cliente ideal: geografía e industrias (los siete tipos de cliente ya están en MARCA.md).
 - Contrato de alquiler: revisión por un abogado antes de usarlo con clientes.
 - Equipo: cuántos y qué hace mejor cada uno.
-- Escaparate de repos: público, privado o mixto.
+- Cuáles repositorios son no comerciales y cómo se presenta cada proyecto en el sitio.
+- Qué es Hellominus como oferta.
 - Dónde vive cada agente cuando exista el primero.

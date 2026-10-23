@@ -81,10 +81,11 @@ DevMinus (marca principal)
 
 - **candyCRM** es un producto del catálogo de DevMinus. Conserva su nombre, su dominio y su identidad visual propia, respaldado por la marca ("candyCRM, de DevMinus"). Hoy no tiene clientes reales: Hellominus figura como primer tenant solo como prueba.
 - **Hellominus** (hellominus.com) también es un proyecto de DevMinus, no una marca aparte. Es además el tenant de prueba de candyCRM.
-- El resto de proyectos del laboratorio se decide uno a uno si se muestran como producto, como ejemplo de lo que se construye, o se mantienen internos.
-- Si un proyecto toca datos o propiedad intelectual de un cliente, no se muestra.
+- **Se muestran todos los proyectos del repositorio**, salvo las academias y los repositorios **no comerciales** (decidido el 2026-10-23). Lo no comercial no es parte del catálogo ni del sitio.
+- Si un proyecto toca datos o propiedad intelectual de un cliente real, se presenta sin esos datos o no se muestra.
 
-**[PENDIENTE]** decidir qué proyectos se muestran y cómo (público, privado o mixto).
+**[PENDIENTE]** definir cuáles repositorios son no comerciales y cómo se presenta cada proyecto en el sitio (ficha, demo, enlace al repo).
+**[PENDIENTE]** qué es Hellominus como oferta (producto, sitio propio o ejemplo de lo construido).
 **[PENDIENTE]** DevMinus Academy: aplazada hasta que la marca tenga fuerza, junto con Hotmart. No tiene relación con las academias del laboratorio.
 
 ## 5b. Stack

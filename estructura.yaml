@@ -21,6 +21,9 @@ carpetas:
   - ruta: documentacion
     para: Documentación del proyecto. El detalle de marca vive en MARCA.md; el stack en STACK.md
 
+  - ruta: documentacion/prototipos-frontend
+    para: Prototipos HTML de la landing (favoritos y notas) antes de construir el frontend real en frontend/web
+
   - ruta: db
     para: Base de datos (Supabase/Postgres) - leads y lo que el sitio necesite persistir
   - ruta: db/migrations

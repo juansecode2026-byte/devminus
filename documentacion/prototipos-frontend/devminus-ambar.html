@@ -1,0 +1,401 @@
+<title>DevMinus Ámbar</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: fondo oscuro con halos de color, paneles de vidrio flotantes; hero con consola de informe a la derecha, bandas de secciones en una columna de 1180px. Paleta: Ámbar */
+:root{
+  --bg:#0d0a08; --fg:#f6f1ec; --muted:#a89d93; --line:rgba(255,236,220,.09); --glass:rgba(255,240,228,.035); --glass-hi:rgba(255,240,228,.07);
+  --accent:#ff6b1f; --accent-ink:#1c0c03; --accent-soft:rgba(255,107,31,.14);
+  --glow1:rgba(255,107,31,.30); --glow2:rgba(170,60,15,.20);
+  --ok:#34d399; --warn:#fbbf24; --bad:#f87171;
+  --f-display:"Sora",ui-sans-serif,system-ui,sans-serif;
+  --f-body:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"Geist Mono",ui-monospace,"Cascadia Mono",Consolas,monospace;
+  --r-lg:22px; --r-md:14px; --r-sm:10px;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 var(--f-body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.ambient{position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(60vw 50vw at 85% -10%,var(--glow1),transparent 60%),
+    radial-gradient(50vw 45vw at -10% 35%,var(--glow2),transparent 60%),
+    radial-gradient(40vw 40vw at 70% 95%,var(--glow2),transparent 65%),
+    var(--bg)}
+.ambient::after{content:"";position:absolute;inset:0;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:64px 64px;mask-image:radial-gradient(ellipse at 50% 0%,#000 10%,transparent 70%);opacity:.5}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+
+/* vidrio */
+.glass{background:linear-gradient(180deg,var(--glass-hi),var(--glass));border:1px solid var(--line);
+  backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 20px 50px -24px rgba(0,0,0,.6);border-radius:var(--r-lg)}
+
+/* nav */
+.nav-band{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;padding-block:14px}
+.nav{display:flex;align-items:center;gap:16px;padding:10px 10px 10px 20px;border-radius:999px}
+.logo{font:600 19px/1 var(--f-display);letter-spacing:-.02em;text-decoration:none;display:flex;align-items:center;gap:10px}
+.logo b{font-weight:600;color:var(--accent)}
+.mark{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;background:var(--accent);color:var(--accent-ink);font:700 15px/1 var(--f-mono)}
+.nav ul{display:flex;gap:4px;list-style:none;margin:0 0 0 auto;padding:0}
+.nav ul a{display:block;padding:8px 14px;border-radius:999px;text-decoration:none;color:var(--muted);font-size:14px;transition:color .2s,background .2s}
+.nav ul a:hover{color:var(--fg);background:var(--glass-hi)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:999px;font:500 14px/1 var(--f-body);text-decoration:none;border:1px solid transparent;cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s}
+.btn-primary{background:var(--accent);color:var(--accent-ink);box-shadow:0 8px 30px -8px var(--glow1)}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 12px 36px -8px var(--glow1)}
+.btn-ghost{border-color:var(--line);color:var(--fg);background:var(--glass)}
+.btn-ghost:hover{background:var(--glass-hi)}
+.nav .btn{margin-left:4px}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;padding-block:56px 72px}
+.eyebrow{font:500 12px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent)}
+h1{font:600 clamp(40px,5.6vw,68px)/1.02 var(--f-display);letter-spacing:-.035em;margin:22px 0 18px;text-wrap:balance}
+h1 em{font-style:normal;color:var(--accent)}
+.lema{font:500 18px/1.4 var(--f-display);color:var(--fg);opacity:.9;margin:0 0 14px}
+.lead{color:var(--muted);max-width:52ch;margin:0 0 30px;font-size:17px}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px}
+.hero-copy{min-width:0}
+
+/* consola */
+.console{padding:22px;min-width:0}
+.console-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+.console-title{font:600 15px/1.2 var(--f-display)}
+.console-sub{font:400 12px/1.4 var(--f-mono);color:var(--muted);margin-top:4px}
+.chip{font:500 11px/1 var(--f-mono);padding:6px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.chip.accent{color:var(--accent);border-color:var(--accent-soft);background:var(--accent-soft)}
+.verdict{display:flex;align-items:center;gap:16px;padding:16px;border-radius:var(--r-md);background:var(--glass);border:1px solid var(--line);margin-bottom:14px}
+.ring{width:64px;height:64px;flex:none}
+.verdict b{display:block;font:600 18px/1.2 var(--f-display)}
+.verdict span{font-size:13px;color:var(--muted)}
+.checks{display:grid;gap:8px;list-style:none;margin:0;padding:0}
+.checks li{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:11px 14px;border-radius:var(--r-sm);background:var(--glass);border:1px solid var(--line);font-size:14px}
+.dot{width:8px;height:8px;border-radius:50%}
+.dot.ok{background:var(--ok)} .dot.warn{background:var(--warn)} .dot.bad{background:var(--bad)}
+.val{font:500 13px/1 var(--f-mono);font-variant-numeric:tabular-nums;color:var(--muted)}
+.bars{display:flex;align-items:flex-end;gap:6px;height:56px;margin-top:14px;padding:0 4px}
+.bars i{flex:1;border-radius:4px 4px 0 0;background:linear-gradient(180deg,var(--accent),var(--accent-soft))}
+.bars-cap{display:flex;justify-content:space-between;font:400 11px/1 var(--f-mono);color:var(--muted);margin-top:8px;padding:0 4px}
+
+/* secciones */
+section{padding-block:72px}
+.sec-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:36px}
+h2{font:600 clamp(28px,3.4vw,42px)/1.1 var(--f-display);letter-spacing:-.03em;margin:14px 0 0;text-wrap:balance;max-width:20ch}
+.sec-head p{color:var(--muted);max-width:44ch;margin:0}
+
+.doors{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.door{padding:24px;display:flex;flex-direction:column;gap:14px;transition:transform .25s,border-color .25s}
+.door:hover{transform:translateY(-5px);border-color:var(--accent-soft)}
+.ico{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent)}
+.ico svg{width:20px;height:20px}
+.door h3{font:600 19px/1.2 var(--f-display);margin:0}
+.door q{font-size:14px;color:var(--muted);quotes:"“" "”"}
+.door p{margin:0;font-size:15px}
+.door .chip{align-self:flex-start;margin-top:auto}
+
+.method{display:grid;grid-template-columns:repeat(4,1fr);gap:0;padding:8px}
+.step{padding:22px;position:relative}
+.step+.step{border-left:1px solid var(--line)}
+.step .n{font:500 12px/1 var(--f-mono);color:var(--accent);letter-spacing:.1em}
+.step h3{font:600 20px/1.2 var(--f-display);margin:12px 0 8px}
+.step p{margin:0;color:var(--muted);font-size:14px}
+
+.audit{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.audit-main{padding:32px;background:linear-gradient(135deg,var(--accent-soft),var(--glass) 60%)}
+.audit-main p{color:var(--muted);max-width:50ch}
+.rules{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.rule{padding:22px}
+.rule h3{font:600 16px/1.3 var(--f-display);margin:0 0 6px}
+.rule p{margin:0;font-size:14px;color:var(--muted)}
+
+.who{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:16px}
+.who article{padding:26px;display:flex;flex-direction:column;gap:10px}
+.who article.big{grid-row:span 2;background:linear-gradient(160deg,var(--accent-soft),var(--glass) 55%)}
+.who h3{font:600 20px/1.2 var(--f-display);margin:0}
+.who p{margin:0;color:var(--muted);font-size:15px}
+.who ul{margin:6px 0 0;padding-left:18px;color:var(--muted);font-size:14px;display:grid;gap:4px}
+
+.products{display:grid;grid-template-columns:1.4fr 1fr;gap:16px}
+.prod{padding:26px;display:flex;flex-direction:column;gap:12px}
+.prod h3{font:600 22px/1.2 var(--f-display);margin:0}
+.prod p{margin:0;color:var(--muted)}
+.prod .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto}
+.prod.pending{border-style:dashed;background:transparent;box-shadow:none}
+
+.team{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.member{padding:24px;display:flex;gap:16px;align-items:center;border-style:dashed;background:transparent;box-shadow:none}
+.avatar{width:52px;height:52px;border-radius:50%;flex:none;border:1px dashed var(--line);display:grid;place-items:center;color:var(--muted);font:500 12px var(--f-mono)}
+.member b{display:block;font:600 16px var(--f-display)}
+.member span{font-size:13px;color:var(--muted)}
+
+.contact{display:grid;grid-template-columns:1fr 1.1fr;gap:32px;padding:36px;align-items:start}
+.contact p{color:var(--muted)}
+form{display:grid;gap:14px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+label{display:grid;gap:6px;font-size:13px;color:var(--muted)}
+input,select,textarea{font:inherit;font-size:15px;color:var(--fg);background:var(--glass);border:1px solid var(--line);border-radius:var(--r-sm);padding:12px 14px;width:100%;min-width:0}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+textarea{min-height:96px;resize:vertical}
+.note{font:400 12px/1.5 var(--f-mono);color:var(--muted)}
+.sent{padding:12px 14px;border-radius:var(--r-sm);background:var(--accent-soft);color:var(--fg);font-size:14px}
+
+footer{padding-block:40px 56px;border-top:1px solid var(--line);margin-top:24px}
+.foot{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center;color:var(--muted);font-size:14px}
+.tag-ej{font:500 10px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);padding:4px 7px;border-radius:6px}
+
+@media (max-width:980px){
+  .hero{grid-template-columns:1fr;gap:36px;padding-block:32px 48px}
+  .doors{grid-template-columns:repeat(2,1fr)}
+  .method{grid-template-columns:repeat(2,1fr)}
+  .step:nth-child(3){border-left:0}
+  .step:nth-child(n+3){border-top:1px solid var(--line)}
+  .audit,.products,.contact{grid-template-columns:1fr}
+  .who{grid-template-columns:1fr 1fr}
+  .who article.big{grid-row:auto;grid-column:1/-1}
+  .team{grid-template-columns:1fr 1fr}
+  .nav ul{display:none}
+  .nav .btn{margin-left:auto}
+}
+@media (max-width:600px){
+  .doors,.method,.rules,.who,.team,.row2{grid-template-columns:1fr}
+  .step+.step{border-left:0;border-top:1px solid var(--line)}
+  section{padding-block:52px}
+  .contact,.audit-main{padding:24px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+
+<div class="ambient" aria-hidden="true"></div>
+
+<div class="nav-band">
+  <div class="wrap">
+    <nav class="nav glass" aria-label="Principal">
+      <a class="logo" href="#inicio"><span class="mark">−</span><span>Dev<b>Minus</b></span></a>
+      <ul>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#auditoria">Auditoría</a></li>
+        <li><a href="#productos">Productos</a></li>
+        <li><a href="#equipo">Equipo</a></li>
+      </ul>
+      <a class="btn btn-primary" href="#contacto">Hablemos</a>
+    </nav>
+  </div>
+</div>
+
+<main id="inicio">
+  <div class="wrap hero">
+    <div class="hero-copy">
+      <div class="eyebrow">AI engineering para empresas</div>
+      <h1>De la idea al sistema de IA <em>funcionando</em>.</h1>
+      <p class="lema">Soluciones inteligentes con firma humana.</p>
+      <p class="lead">Somos el equipo que contratas para decidir qué hacer con inteligencia artificial, construirlo de punta a punta, auditar lo que otros te proponen y enseñarle a tu gente a usarlo.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#contacto">Agenda un diagnóstico</a>
+        <a class="btn btn-ghost" href="#auditoria">Pide una segunda opinión</a>
+      </div>
+    </div>
+
+    <aside class="console glass" aria-label="Ejemplo de informe de auditoría">
+      <div class="console-head">
+        <div>
+          <div class="console-title">Informe de viabilidad</div>
+          <div class="console-sub">Propuesta externa · Agente de soporte con RAG</div>
+        </div>
+        <span class="tag-ej">Ejemplo</span>
+      </div>
+      <div class="verdict">
+        <svg class="ring" viewBox="0 0 64 64" aria-hidden="true">
+          <circle cx="32" cy="32" r="26" fill="none" stroke="var(--line)" stroke-width="6"/>
+          <circle cx="32" cy="32" r="26" fill="none" stroke="var(--accent)" stroke-width="6" stroke-linecap="round" stroke-dasharray="163.4" stroke-dashoffset="47" transform="rotate(-90 32 32)"/>
+          <text x="32" y="37" text-anchor="middle" fill="var(--fg)" font-family="Geist Mono, monospace" font-size="15" font-weight="500">71</text>
+        </svg>
+        <div><b>Viable con ajustes</b><span>3 de 5 criterios cumplen. El costo proyectado no cuadra con el volumen real.</span></div>
+      </div>
+      <ul class="checks">
+        <li><span class="dot ok"></span>Arquitectura y recuperación de contexto<span class="val">OK</span></li>
+        <li><span class="dot ok"></span>Latencia p95<span class="val">1,9 s</span></li>
+        <li><span class="dot warn"></span>Costo por 1.000 consultas<span class="val">US$ 4,20</span></li>
+        <li><span class="dot bad"></span>Fallos en evals de alucinación<span class="val">6 / 40</span></li>
+        <li><span class="dot ok"></span>Manejo de datos personales<span class="val">OK</span></li>
+      </ul>
+      <div class="bars" aria-hidden="true"><i style="height:38%"></i><i style="height:52%"></i><i style="height:47%"></i><i style="height:66%"></i><i style="height:71%"></i><i style="height:84%"></i><i style="height:92%"></i></div>
+      <div class="bars-cap"><span>Precisión por iteración de prompts</span><span>v1 → v7</span></div>
+    </aside>
+  </div>
+
+  <section id="servicios">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><div class="eyebrow">Cuatro puertas, un mismo equipo</div><h2>Entra por donde lo necesites.</h2></div>
+        <p>Cada servicio se puede contratar solo, y cada uno lleva naturalmente a los otros.</p>
+      </div>
+      <div class="doors">
+        <article class="door glass">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></div>
+          <h3>Consultoría</h3><q>No sé por dónde empezar con IA.</q>
+          <p>Diagnóstico de procesos y una hoja de ruta con lo que conviene automatizar primero.</p>
+          <span class="chip">Diagnóstico en 2 semanas</span>
+        </article>
+        <article class="door glass">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m8 7-5 5 5 5"/><path d="m16 7 5 5-5 5"/><path d="m13.5 4-3 16"/></svg></div>
+          <h3>Construcción</h3><q>Necesito esto hecho.</q>
+          <p>Software a la medida de punta a punta: CRM de ventas, agentes y automatizaciones. Para comprar o alquilar.</p>
+          <span class="chip">Prototipo en 30 días</span>
+        </article>
+        <article class="door glass">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5 12 4l9 4.5-9 4.5z"/><path d="M7 10.5V15c0 1.7 2.2 3 5 3s5-1.3 5-3v-4.5"/></svg></div>
+          <h3>Capacitación</h3><q>Quiero que mi equipo la sepa usar.</q>
+          <p>Programas para compañías y talleres para grupos de 15 a 20 personas. Nunca uno a uno.</p>
+          <span class="chip">Taller de 1 día</span>
+        </article>
+        <article class="door glass">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg></div>
+          <h3>Auditoría</h3><q>¿Es viable lo que me están proponiendo?</q>
+          <p>Segunda opinión independiente sobre el modelo que otro proveedor va a implementar.</p>
+          <span class="chip accent">Precio fijo</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="metodo">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><div class="eyebrow">Método</div><h2 id="metodo">Un solo proceso detrás de todo.</h2></div>
+        <p>La consultoría cubre los dos primeros pasos, la construcción el tercero y la capacitación el cuarto.</p>
+      </div>
+      <div class="method glass">
+        <div class="step"><span class="n">01</span><h3>Entender</h3><p>Cómo trabaja hoy tu equipo y dónde se pierde tiempo o dinero.</p></div>
+        <div class="step"><span class="n">02</span><h3>Diseñar</h3><p>Qué conviene construir, con qué modelos y cuánto va a costar operarlo.</p></div>
+        <div class="step"><span class="n">03</span><h3>Construir</h3><p>Software en producción, medido con evals y con datos reales.</p></div>
+        <div class="step"><span class="n">04</span><h3>Transferir</h3><p>Tu gente aprende a usarlo y a mantenerlo sin depender de nosotros.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="auditoria">
+    <div class="wrap">
+      <div class="audit">
+        <div class="audit-main glass">
+          <div class="eyebrow">Auditoría de IA</div>
+          <h2>Antes de pagarle a otro, pregúntanos.</h2>
+          <p>Si un proveedor te propone implementar un modelo de IA, lo analizamos desde AI engineering: arquitectura, costo real de operación, riesgos y si va a funcionar con tu volumen. Recibes un informe independiente y decides con datos.</p>
+          <a class="btn btn-primary" href="#contacto">Solicitar auditoría</a>
+        </div>
+        <div class="rules">
+          <div class="rule glass"><h3>Precio fijo</h3><p>Se cobra el informe, contrates después o no.</p></div>
+          <div class="rule glass"><h3>Decimos la verdad</h3><p>Si la propuesta es viable, el informe lo dice.</p></div>
+          <div class="rule glass"><h3>Sin conflicto oculto</h3><p>Declaramos que también construimos. El informe nunca ofrece reemplazar al proveedor.</p></div>
+          <div class="rule glass"><h3>Confidencial</h3><p>Lo que compartes sobre la otra propuesta no se usa ni se difunde.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="quien">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><div class="eyebrow">Para quién</div><h2 id="quien">Desde un equipo de 15 hasta una corporación.</h2></div>
+      </div>
+      <div class="who">
+        <article class="glass big">
+          <span class="chip accent" style="align-self:flex-start">Grandes empresas</span>
+          <h3>Estructura tu propio equipo de AI engineering.</h3>
+          <p>Te ayudamos a definir roles, stack, procesos de evaluación y gobierno de modelos, y acompañamos los primeros proyectos hasta que el equipo camina solo.</p>
+          <ul><li>Diseño del área y perfiles</li><li>Plataforma y estándares de evaluación</li><li>Primeros casos en producción</li></ul>
+        </article>
+        <article class="glass"><h3>Pymes y medianas</h3><p>Consultoría y soluciones con IA que se pagan con el tiempo que ahorran.</p></article>
+        <article class="glass"><h3>Software a la medida</h3><p>Lo compras o lo alquilas por suscripción, con plan gestionado si prefieres que lo operemos.</p></article>
+        <article class="glass"><h3>Equipos que aprenden</h3><p>Capacitación para compañías y grupos de 15 a 20 personas.</p></article>
+        <article class="glass"><h3>Antes de implementar</h3><p>Auditoría de la propuesta de otro proveedor.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="productos">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><div class="eyebrow">Productos</div><h2>Software propio, listo para usar.</h2></div>
+        <p>Productos de DevMinus que se alquilan por suscripción o se adaptan a tu empresa.</p>
+      </div>
+      <div class="products">
+        <article class="prod glass">
+          <span class="chip accent" style="align-self:flex-start">Suscripción</span>
+          <h3>candyCRM</h3>
+          <p>CRM multicanal con Kanban de oportunidades, bandeja unificada de WhatsApp, Instagram, Messenger y chat web, y un copiloto con IA. Autoservicio o adaptado por nuestro equipo.</p>
+          <div class="tags"><span class="chip">Multi-tenant</span><span class="chip">Bandeja unificada</span><span class="chip">Copiloto IA</span></div>
+        </article>
+        <article class="prod glass pending">
+          <h3>Más productos</h3>
+          <p>Las fichas del resto del catálogo están en preparación.</p>
+          <div class="tags"><span class="tag-ej">Por definir</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="equipo">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><div class="eyebrow">Equipo</div><h2>Las personas detrás de cada firma.</h2></div>
+        <p>Cada perfil se presenta con lo que ha construido, no con su cargo.</p>
+      </div>
+      <div class="team">
+        <div class="member glass"><div class="avatar">?</div><div><b>Perfil por definir</b><span>Nombre, especialidad y proyectos</span></div></div>
+        <div class="member glass"><div class="avatar">?</div><div><b>Perfil por definir</b><span>Nombre, especialidad y proyectos</span></div></div>
+        <div class="member glass"><div class="avatar">?</div><div><b>Perfil por definir</b><span>Nombre, especialidad y proyectos</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto">
+    <div class="wrap">
+      <div class="contact glass">
+        <div>
+          <div class="eyebrow">Contacto</div>
+          <h2>Cuéntanos qué quieres resolver.</h2>
+          <p>Respondemos con una propuesta de por dónde empezar: diagnóstico, construcción, capacitación o auditoría.</p>
+        </div>
+        <form id="form-contacto" novalidate>
+          <div class="row2">
+            <label for="f-nombre">Nombre<input id="f-nombre" name="nombre" autocomplete="name" required></label>
+            <label for="f-empresa">Empresa<input id="f-empresa" name="empresa" autocomplete="organization"></label>
+          </div>
+          <label for="f-correo">Correo<input id="f-correo" name="correo" type="email" autocomplete="email" required></label>
+          <label for="f-puerta">Qué necesitas
+            <select id="f-puerta" name="puerta">
+              <option>Consultoría</option><option>Construcción</option><option>Capacitación</option><option>Auditoría</option><option>Aún no lo sé</option>
+            </select>
+          </label>
+          <label for="f-mensaje">Mensaje<textarea id="f-mensaje" name="mensaje" placeholder="Ej.: un proveedor nos propone un agente de soporte y queremos saber si es viable."></textarea></label>
+          <button class="btn btn-primary" type="submit" style="justify-self:start">Enviar</button>
+          <p class="note">Maqueta de diseño: este formulario todavía no envía datos.</p>
+          <div class="sent" id="f-ok" hidden>Formulario de prueba: los datos no se enviaron a ningún lado.</div>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <a class="logo" href="#inicio"><span class="mark">−</span><span>Dev<b>Minus</b></span></a>
+    <span>Soluciones inteligentes con firma humana.</span>
+    <span>Variante Ámbar · 2026</span>
+  </div>
+</footer>
+
+<script>
+document.getElementById('form-contacto').addEventListener('submit',function(e){
+  e.preventDefault();
+  document.getElementById('f-ok').hidden=false;
+});
+</script>
