@@ -14,7 +14,7 @@ export function EncabezadoSeccion({ id, etiqueta, titulo, descripcion }: Props) 
           {titulo}
         </h2>
       </div>
-      {descripcion && <p className="m-0 max-w-[44ch] text-muted">{descripcion}</p>}
+      {descripcion && <p className="m-0 max-w-desc text-muted">{descripcion}</p>}
     </div>
   );
 }

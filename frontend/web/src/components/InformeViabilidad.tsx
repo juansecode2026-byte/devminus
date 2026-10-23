@@ -47,7 +47,7 @@ export function InformeViabilidad() {
             <text x="32" y="35" textAnchor="middle" fill="var(--color-text)" fontFamily="var(--font-mono)" fontSize="16" fontWeight="500">
               {informe.puntaje}
             </text>
-            <text x="32" y="47" textAnchor="middle" fill="var(--color-text-muted)" fontFamily="var(--font-mono)" fontSize="9">
+            <text x="32" y="49" textAnchor="middle" fill="var(--color-text-muted)" fontFamily="var(--font-mono)" fontSize="11">
               /100
             </text>
           </svg>

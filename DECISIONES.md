@@ -40,6 +40,10 @@ Ninguna todavía.
 
 ## Abiertas
 
+- **Requisito para publicar el sitio:** política de datos (Ley 1581) enlazada desde el formulario y el pie. Mientras `PENDIENTES.politicaDatos` sea `null`, el aviso no se muestra.
+- **Requisito del Worker del formulario:** debe rechazar con 200 sin guardar nada cuando el campo `website` (campo trampa) venga con texto, y validar y limitar el tamaño de lo que recibe.
+- **Configuración de producción:** `VITE_CONTACT_ENDPOINT` debe estar definida en Cloudflare Pages; sin ella el formulario muestra el error en vez de fingir el envío.
+
 - Primera conversación gratuita de 30 minutos (la proponen los cuatro competidores revisados; no está en MARCA).
 - Precio de la auditoría, plazo de respuesta, correo de contacto y política de datos (Ley 1581).
 - Herramienta de analítica (por ejemplo Cloudflare Zaraz o Plausible).

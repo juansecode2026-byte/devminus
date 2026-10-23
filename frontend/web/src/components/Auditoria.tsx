@@ -1,13 +1,12 @@
 import { COMPROMISOS, PENDIENTES, QUE_REVISAMOS } from '../lib/contenido';
-import { useContactoStore } from '../stores/contactoStore';
+import { hrefContacto, irAContacto } from '../lib/navegacion';
 import { IconoEstado } from './Iconos';
 
 export function Auditoria() {
-  const setPuerta = useContactoStore((s) => s.setPuerta);
-  const precio = PENDIENTES.precioAuditoria ?? 'monto por definir';
+  const precio = PENDIENTES.precioAuditoria;
 
   const cta = (extra = '') => (
-    <a href="#contacto" className={`btn btn-primary ${extra}`} onClick={() => setPuerta('Auditoría')}>
+    <a href={hrefContacto('Auditoría')} className={`btn btn-primary ${extra}`} onClick={(e) => irAContacto(e, 'Auditoría')}>
       Solicitar auditoría
     </a>
   );
@@ -35,7 +34,7 @@ export function Auditoria() {
             </ul>
             <div className="flex flex-wrap items-center gap-4">
               {cta()}
-              <span className="chip chip-accent">Precio fijo · {precio}</span>
+              <span className="chip chip-accent">Precio fijo{precio ? ` · ${precio}` : ''}</span>
             </div>
           </div>
 

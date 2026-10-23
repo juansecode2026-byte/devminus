@@ -30,9 +30,7 @@ export function Productos() {
             <a href={p.enlace} className="inline-flex min-h-11 items-center gap-2 font-medium text-accent no-underline hover:underline">
               Conoce {p.nombre} <IconoFlecha />
             </a>
-          ) : (
-            <p className="m-0 text-sm text-muted">Enlace a {p.nombre} por definir.</p>
-          )}
+          ) : null}
         </article>
         <p className="m-0 mt-4 text-sm text-muted">Más productos del catálogo, pronto.</p>
       </div>

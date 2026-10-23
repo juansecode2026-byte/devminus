@@ -3,7 +3,7 @@ import { FormularioContacto } from './FormularioContacto';
 
 const PASOS = [
   'Escribes.',
-  `Te respondemos con una propuesta de por dónde empezar.${PENDIENTES.plazoRespuesta ? ` En ${PENDIENTES.plazoRespuesta}.` : ' Plazo de respuesta por definir.'}`,
+  `Te respondemos con una propuesta de por dónde empezar${PENDIENTES.plazoRespuesta ? ` en ${PENDIENTES.plazoRespuesta}` : ''}.`,
   'Decides.',
 ];
 
@@ -23,13 +23,13 @@ export function Contacto() {
             <p className="label m-0 mb-4">Qué pasa después</p>
             <ol className="m-0 mb-6 grid list-none gap-4 p-0 text-sm">
               {PASOS.map((paso, i) => (
-                <li key={paso} className="grid grid-cols-[32px_1fr]">
+                <li key={paso} className="grid grid-cols-[var(--space-4)_1fr]">
                   <span className="font-mono font-medium text-accent">{String(i + 1).padStart(2, '0')}</span>
                   {paso}
                 </li>
               ))}
             </ol>
-            <p className="m-0 text-sm text-muted">Correo directo: {PENDIENTES.correo ?? 'por definir'}.</p>
+            {PENDIENTES.correo && <p className="m-0 text-sm text-muted">Correo directo: {PENDIENTES.correo}.</p>}
           </div>
           <FormularioContacto />
         </div>

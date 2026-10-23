@@ -14,6 +14,21 @@ export const PUERTAS: readonly Puerta[] = [
   'Aún no lo sé',
 ];
 
+/** Identificador de cada puerta para enlaces compartibles: /?puerta=auditoria#contacto */
+export const SLUGS_PUERTA: Record<Puerta, string> = {
+  Consultoría: 'consultoria',
+  Construcción: 'construccion',
+  Capacitación: 'capacitacion',
+  Auditoría: 'auditoria',
+  'Aún no lo sé': 'no-se',
+};
+
+export function puertaDesdeSlug(slug: string | null): Puerta | '' {
+  if (!slug) return '';
+  const encontrada = PUERTAS.find((p) => SLUGS_PUERTA[p] === slug);
+  return encontrada ?? '';
+}
+
 export type IconoPuerta = 'lupa' | 'codigo' | 'birrete' | 'escudo';
 
 export interface Servicio {

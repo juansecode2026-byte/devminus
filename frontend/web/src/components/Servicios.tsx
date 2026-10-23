@@ -1,11 +1,9 @@
 import { SERVICIOS } from '../lib/contenido';
-import { useContactoStore } from '../stores/contactoStore';
+import { hrefContacto, irAContacto } from '../lib/navegacion';
 import { EncabezadoSeccion } from './EncabezadoSeccion';
 import { IconoFlecha, IconoServicio } from './Iconos';
 
 export function Servicios() {
-  const setPuerta = useContactoStore((s) => s.setPuerta);
-
   return (
     <section id="servicios" aria-labelledby="t-servicios" className="py-16 lg:py-24">
       <div className="wrap">
@@ -19,9 +17,9 @@ export function Servicios() {
           {SERVICIOS.map((s) => (
             <a
               key={s.puerta}
-              href="#contacto"
-              onClick={() => setPuerta(s.puerta)}
-              className="surface-1 group flex flex-col gap-4 p-6 text-text no-underline transition-[transform,border-color] duration-200 ease-brand hover:-translate-y-1 hover:border-line-strong active:-translate-y-0.5 motion-reduce:hover:translate-y-0"
+              href={hrefContacto(s.puerta)}
+              onClick={(e) => irAContacto(e, s.puerta)}
+              className="surface-1 group flex flex-col gap-4 p-6 text-text no-underline transition-[transform,border-color] duration-200 ease-brand hover:border-line-strong motion-safe:hover:-translate-y-1 motion-safe:active:-translate-y-0.5"
             >
               <span className="grid h-10 w-10 place-items-center rounded-sm border border-line bg-surface-2">
                 <IconoServicio icono={s.icono} />
@@ -32,7 +30,7 @@ export function Servicios() {
               <span className="mt-auto grid grid-cols-[1fr_auto] items-end gap-x-2 gap-y-1 border-t border-line pt-4">
                 <span className="label col-span-2">Empieza con</span>
                 <span className="text-sm font-medium">{s.entrada}</span>
-                <span className="transition-[transform,color] duration-200 ease-brand group-hover:translate-x-1 group-hover:text-accent">
+                <span className="transition-[transform,color] duration-200 ease-brand group-hover:text-accent motion-safe:group-hover:translate-x-1">
                   <IconoFlecha />
                 </span>
               </span>

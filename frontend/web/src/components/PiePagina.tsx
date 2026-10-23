@@ -16,7 +16,13 @@ export function PiePagina() {
         <div>
           © {new Date().getFullYear()} DevMinus
           <br />
-          {PENDIENTES.correo ?? 'Correo por definir'} · Política de datos{PENDIENTES.politicaDatos ? '' : ' por definir'}
+          {PENDIENTES.correo}
+          {PENDIENTES.correo && PENDIENTES.politicaDatos && ' · '}
+          {PENDIENTES.politicaDatos && (
+            <a href={PENDIENTES.politicaDatos} className="text-accent underline">
+              Política de datos
+            </a>
+          )}
         </div>
       </div>
     </footer>
