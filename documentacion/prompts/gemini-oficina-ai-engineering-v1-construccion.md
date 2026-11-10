@@ -1,40 +1,34 @@
-# Prompt para Gemini: oficina virtual del departamento de AI Engineering
+# Prompt v1 para Gemini: construir la oficina virtual de AI Engineering
 
-> Creado el 2026-11-10. Se usa con Gemini sobre el proyecto 3D (`1-gemini/visual/app/`, Three.js + Vite).
+> Creado el 2026-11-10. Se usa con Gemini sobre el proyecto 3D `Repositorios NO comerciales/OFICINA AGENTICA DEVMINUS DUBAI/1-gemini/visual/app/` (Three.js + Vite).
 > Es la oficina piloto: si queda bien, el concepto se replica a los demás departamentos de la edificación DevMinus, cada uno con su propio estilo.
+> Esta versión es **solo para construir**. La optimización de rendimiento va después, con `gemini-oficina-ai-engineering-v2-optimizacion.md`, cuando la oficina ya funcione y se pueda medir.
 > Referencia visual: `documentacion/bocetos-oficina-interna/oficina-ai-engineering-3d.html` (adjúntalo a Gemini o cópialo a su proyecto).
 
 ## Antes de pegarlo (para ti, no para Gemini)
-Este computador (ASUS TUF A15) tiene dos tarjetas gráficas: la AMD Radeon 740M integrada, que es la que maneja la pantalla, y la NVIDIA GeForce RTX 3050 Laptop de 4 GB. Por defecto el navegador suele usar la integrada, que es mucho más lenta. Para que la escena use la NVIDIA:
-1. Configuración de Windows → Sistema → Pantalla → Gráficos.
-2. Busca el navegador (Chrome o Edge) → Opciones → **Alto rendimiento** (NVIDIA GeForce RTX 3050).
-3. Cierra y vuelve a abrir el navegador. En `chrome://gpu` debe aparecer la NVIDIA.
-4. Trabaja con el cargador conectado: en batería la tarjeta baja su rendimiento.
+Asigna Chrome a la tarjeta NVIDIA: Configuración de Windows → Sistema → Pantalla → Gráficos → agregar `C:\Program Files\Google\Chrome\Application\chrome.exe` → Opciones → Alto rendimiento. Reinicia Chrome y comprueba en `chrome://gpu` que GL_RENDERER diga NVIDIA. Trabaja con el cargador conectado.
 
 ## Prompt
 
 ```text
 Necesito construir una oficina virtual en 3D, en este mismo proyecto, para el departamento de AI Engineering de la edificación DevMinus. Es la oficina piloto: después voy a replicar el concepto para otros departamentos (backend, frontend, diseño y branding, etc.), cada uno con su propio estilo, así que la arquitectura debe permitir crear una oficina nueva cambiando solo una configuración de tema y de datos.
 
-Te adjunto como referencia de calidad visual el archivo oficina-ai-engineering-3d.html: una oficina en Three.js con ingenieros robot, monitores con contenido vivo, pantalla de pared, zona de pausa y panel lateral. Quiero esa calidad o mejor, pero más ligera.
+Te adjunto como referencia de calidad visual el archivo oficina-ai-engineering-3d.html: una oficina en Three.js con ingenieros robot, monitores con contenido vivo, pantalla de pared, zona de pausa y panel lateral. Quiero esa calidad o mejor.
+
+En esta etapa el objetivo es construir la oficina completa y que funcione. La optimización fina de rendimiento (niveles de calidad, medición de FPS, presupuestos) la haremos en una etapa posterior; no la hagas ahora.
 
 ## Paso 1: investiga y propón antes de editar
 1. Haz un commit del estado actual.
 2. Revisa cómo están organizadas las escenas (registry.js, main.js) y propón cómo agregar esta oficina como una escena nueva e independiente, sin tocar concept3 ni concept4.
-3. Muéstrame el plan (archivos nuevos, estructura de la configuración, presupuesto de rendimiento) y espera mi confirmación.
+3. Muéstrame el plan (archivos nuevos y estructura de la configuración) y espera mi confirmación.
 
-## Paso 2: hardware objetivo y rendimiento
-El equipo es un ASUS TUF A15: Ryzen 7 7445HS (6 núcleos), 16 GB de RAM, GPU NVIDIA GeForce RTX 3050 Laptop con 4 GB de VRAM y GPU integrada AMD Radeon 740M. Pantalla de 1920×1080 a 60 Hz. La escena debe verse muy bien y mantenerse ligera:
-- WebGLRenderer con powerPreference: 'high-performance'. Lee el nombre de la GPU (WEBGL_debug_renderer_info) y, si es la Radeon integrada, muestra un aviso discreto: "Estás usando la gráfica integrada; asigna el navegador a la NVIDIA para mejor rendimiento".
-- Tres niveles de calidad (Bajo, Medio, Alto), elegidos automáticamente según los FPS de los primeros segundos y cambiables desde un botón. Objetivo: 60 FPS en Medio a 1080p con la RTX 3050.
-- Pixel ratio máximo 1.5 en Alto, 1.25 en Medio y 1.0 en Bajo; baja automáticamente si los FPS caen de 50.
-- InstancedMesh para todo lo repetido (escritorios, sillas, plantas, luminarias, cables, consolas). Materiales compartidos. MeshStandardMaterial; nada de MeshPhysicalMaterial con transmisión.
-- Presupuesto: menos de 250 draw calls y menos de 400 000 triángulos en Medio. Texturas de máximo 1024 px.
-- Una sola luz direccional con sombras (mapa de 2048 en Alto, 1024 en Medio, sin sombras en Bajo) más luz ambiental. Para los agentes, sombras de contacto simples (un disco suave bajo cada uno) en vez de sombras dinámicas.
-- Las pantallas (monitores, pantalla gigante, pantalla del creador) se dibujan en canvas y se actualizan a 8–10 veces por segundo, no a 60.
-- Etiquetas de nombres en una sola capa HTML encima del canvas, actualizadas una vez por cuadro, ocultas si quedan detrás de la cámara.
-- Post-procesado solo en Alto (un bloom suave en pantallas y neones). En Medio y Bajo, sin post-procesado.
-- Detener el render cuando la pestaña no está visible. Mostrar un contador de FPS y de draw calls en modo depuración.
+## Paso 2: reglas de construcción (obligatorias desde el inicio)
+No son optimización: son la forma de construir, porque cambiarlas después obliga a rehacer la escena.
+1. Usa InstancedMesh para todo lo que se repite (escritorios, sillas, plantas, luminarias, cables, consolas).
+2. Comparte materiales y geometrías; no crees uno nuevo por cada objeto.
+3. Las pantallas (monitores, pantalla gigante, pantalla del creador) se dibujan en canvas y se redibujan entre 8 y 10 veces por segundo, no en cada cuadro.
+4. Separa en módulos: estructura de la sala, tema visual (paleta, materiales, decoración, estilo de pantallas), datos del equipo (agentes, líder, roles) y botones del puesto de mando. Crear la oficina de otro departamento debe ser escribir un archivo de tema y uno de datos.
+Además, crea el WebGLRenderer con powerPreference: 'high-performance'.
 
 ## Paso 3: espacios de la oficina
 La oficina tiene tres zonas conectadas en un mismo piso:
@@ -65,18 +59,15 @@ La oficina tiene tres zonas conectadas en un mismo piso:
   - Líder: "Orion", Líder de AI Engineering.
   - "Nova", pruebas; "Lumen", LLMs y prompts; "Atlas", RAG; "Orbit", agentes y MCP; "Forge", backend y APIs; "Delta", datos y SQL.
 - Estados: trabajando, caminando, en pausa (centro de juegos), recibiendo tarea. El estado se nota en el agente (luz del pecho, postura) y en su monitor.
-- Los agentes son robots estilizados, como en la referencia, con animaciones simples (caminar, sentarse, teclear, jugar con un mando). Usa una geometría compartida e instancias donde se pueda.
+- Los agentes son robots estilizados, como en la referencia, con animaciones simples (caminar, sentarse, teclear, jugar con un mando).
 
 ## Paso 6: decoración de oficina de AI Engineering
 Que se note que es una oficina de AI engineers: pizarras con diagramas (RAG, evals, arquitectura de agentes), un rack de servidores con luces, un clúster de GPUs con ventiladores y LEDs, un letrero de neón "AI ENGINEERING", cables ordenados en bandejas, plantas, una máquina de café y cuadros con diagramas de redes neuronales genéricos. Todo coherente con la paleta de la oficina y sin saturar.
 
-## Paso 7: arquitectura para replicar a otros departamentos
-- Separa en módulos: estructura de la sala, tema visual (paleta, materiales, decoración, estilo de pantallas), datos del equipo (agentes, líder, roles) y botones del puesto de mando.
-- Crear la oficina de otro departamento debe ser escribir un archivo de tema y uno de datos. Ejemplos de estilo para después, no los construyas ahora: backend sobrio y técnico, con racks y consolas; frontend con estética de código y componentes en pantalla; diseño y branding muy visual, con color y tableros de inspiración.
+Ejemplos de estilo para otros departamentos, para que la arquitectura los permita (no los construyas ahora): backend sobrio y técnico, con racks y consolas; frontend con estética de código y componentes en pantalla; diseño y branding muy visual, con color y tableros de inspiración.
 
-## Paso 8: verificación
+## Paso 7: verificación
 - Corre el build y revisa que la consola esté limpia.
-- Mide FPS y draw calls en Bajo, Medio y Alto con la RTX 3050 y repórtamelos.
 - Muéstrame capturas o describe: la vista general, la pantalla gigante en cada modo, el centro de juegos y la secuencia del creador dando una orden al líder.
-- Dime qué archivos creaste o cambiaste.
+- Dime qué archivos creaste o cambiaste y cómo está organizada la configuración de tema y de datos.
 ```
