@@ -26,7 +26,7 @@ Lo que se construye acá es el **sitio de marca**: portada, servicios, equipo y 
 
 - React 18 + Vite + TypeScript + Tailwind 3 + Zustand + React Router. Comandos: `npm run dev`, `npm run build`, `npm run lint`, `npm run typecheck`.
 - **Excepción declarada al estándar del laboratorio:** el skill `revisor-full-stack` pide CSS Modules; este proyecto usa **Tailwind** porque así lo fija `STACK.md` (mismo stack de hellominus.com). La regla de "cero valores sueltos" se mantiene: todos los valores viven en `src/lib/tokens.css` y `tailwind.config.ts` solo los referencia.
-- El diseño sale de `documentacion/prototipos-frontend/REVISION-UX.md` (prototipo `devminus-cobalto-v3.html`).
+- El diseño sale de `REVISION-UX.md` (prototipo `devminus-cobalto-v3.html`). Esos prototipos se movieron el 2026-11-10 al proyecto de Dubái (`Documentación/Prototipos frontend DevMinus/`); los valores ya viven en `src/lib/tokens.css` y `contenido.ts`.
 - El contenido de la página vive en `src/lib/contenido.ts` y debe coincidir con `MARCA.md`. Los valores `null` son pendientes de decisión y se muestran como "por definir".
 - La sección de Equipo no se renderiza hasta tener al menos dos perfiles reales.
 - Variables de entorno (ver `frontend/web/.env.example`):

@@ -1,6 +1,6 @@
 /*
  * Tokens de diseño de DevMinus (paleta Cobalto).
- * Fuente: documentacion/prototipos-frontend/REVISION-UX.md, sección 3.
+ * Fuente: REVISION-UX.md, sección 3 (movido al proyecto de Dubái, Documentación/Prototipos frontend DevMinus/).
  * Todo color, tamaño, radio y espacio de la app sale de aquí; tailwind.config.ts
  * los expone como clases. No escribir valores sueltos en los componentes.
  */

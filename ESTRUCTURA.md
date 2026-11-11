@@ -1,6 +1,6 @@
 # Estructura del proyecto — DevMinus
 
-**Avance:** 12 de 24 carpetas con contenido.
+**Avance:** 11 de 23 carpetas con contenido.
 
 Generado por `scripts/estructura.py`. No editar a mano: se sobrescribe.
 
@@ -12,7 +12,6 @@ Generado por `scripts/estructura.py`. No editar a mano: se sobrescribe.
 | ⬜ | `.claude/rules/` | Reglas por tema, cargadas solo cuando aplican |
 | ⬜ | `.claude/workflows/` | Scripts de Dynamic Workflows guardados |
 | ✅ | `documentacion/` | Documentación del proyecto. El detalle de marca vive en MARCA.md; el stack en STACK.md |
-| ✅ | `documentacion/prototipos-frontend/` | Prototipos HTML de la landing (favoritos y notas) antes de construir el frontend real en frontend/web |
 | ⬜ | `db/` | Base de datos (Supabase/Postgres) - leads y lo que el sitio necesite persistir |
 | ⬜ | `db/migrations/` | Migraciones incrementales del schema, en orden cronológico |
 | ⬜ | `db/policies/` | Políticas RLS en archivos separados del schema - RLS obligatorio desde el primer día |
