@@ -24,9 +24,6 @@ carpetas:
   - ruta: documentacion/prototipos-frontend
     para: Prototipos HTML de la landing (favoritos y notas) antes de construir el frontend real en frontend/web
 
-  - ruta: documentacion/prompts
-    para: Prompts reutilizables para otras herramientas (Gemini, etc.), cada uno con su contexto y cómo usarlo
-
   - ruta: documentacion/bocetos-oficina-interna
     para: Bocetos de la oficina 3D del panel interno (HTML exportados de los artefactos) y su README
 
